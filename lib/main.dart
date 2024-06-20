@@ -13,7 +13,21 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Web App (Sipho)',
       theme: ThemeData(
-        useMaterial3: true,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.all<Color>(Colors.red),
+            foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+            shadowColor: WidgetStateProperty.all(Colors.lightBlue),
+            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0),
+              ),
+            ),
+            textStyle: WidgetStateProperty.all<TextStyle>(
+              const TextStyle(fontSize: 16.3, fontWeight: FontWeight.normal),
+            ),
+          ),
+        ),
       ),
       home: MyHomePage(),
     );
