@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'providers/incrementer_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,7 +12,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ChangeNotifierProvider(
+      create: (context) => IncrementerProvider(),
+    child: MaterialApp(
       title: 'Flutter Web App (Sipho)',
       theme: ThemeData(
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -30,7 +34,9 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: MyHomePage(),
+    ),
     );
+
   }
 }
 
@@ -40,11 +46,15 @@ class MyHomePage extends StatelessWidget  {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-
+        child: Consumer<IncrementerProvider>(
+          builder: (context, counter, child) {
+            return ElevatedButton(
+              onPressed: () {
+                counter.executeIncrementer();
+              },
+              child: Text('${counter.value}'),
+            );
           },
-          child: const Text('New Button'),
         ),
       ),
     );
